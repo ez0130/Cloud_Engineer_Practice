@@ -1,0 +1,23 @@
+Create IAM users and groups with limited access — specifically, users who can access only S3, and test their permissions using AWS CLI.
+
+1. Install AWS CLI
+https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
+msiexec.exe /i https://awscli.amazonaws.com/AWSCLIV2.msi
+
+2. Create IAM Groups
+
+3. Create IAM Users
+
+4. Configure AWS CLI with the User just created
+aws configure --profile s3user
+
+
+AWS Access Key ID     [Your Key ID]
+AWS Secret Access Key [Your Secret Key]
+Default region name    us-east-2
+Default output format  json
+
+
+5. Restricting other users
+aws ec2 describe-instances --profile s3user
+
