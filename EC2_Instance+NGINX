@@ -1,0 +1,20 @@
+1. Create EC2 instance
+2. Generate key with openssh .pem  
+3. Change key permission with powerbash 
+    # .pem 파일의 상속 제거
+    icacls C:\Users\USERNAME\.ssh\my-key.pem /inheritance:r
+    # 현재 사용자에게 읽기 권한만 부여
+    icacls C:\Users\USERNAME\.ssh\my-key.pem /grant:r USERNAME:R)
+4. Set security group inbound policy ( Enable http port 80 with 0.0.0.0/0
+5. Connect through SSH
+  ssh -i "C:\Users\#####\.ssh\my-key.pem" ec2-user@publicIP
+6. Install Ngingx
+  #Check EC2 instance os version
+  cat /etc/os-release
+
+  #Linux amazon 2023 version , nginx install
+  sudo dnf update -y
+  sudo dnf install nginx -y
+  sudo systemctl enable nginx
+  sudo systemctl start nginx
+7. Check with public IP address with nginx page!
