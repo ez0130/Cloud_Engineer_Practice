@@ -1,0 +1,38 @@
+1. Move to index folder. 
+  cd /usr/share/nginx/html
+2. Remove or edit current index.html
+  sudo rm index.html
+  sudo nano index.html
+  
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Cloud Page</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Hello from EC2!</h1>
+  <img src="cloud.png" width="200"/>
+  <p>This page is served by Nginx on Amazon Linux 😎</p>
+</body>
+</html>
+
+
+To save: Ctrl+O → Enter → Ctrl+X
+
+Upload image: sudo curl -o cloud.png http://url_address
+
+Style file
+sudo nano style.css
+body {
+  background-color: #f0f0f0;
+  font-family: sans-serif;
+  text-align: center;
+  padding-top: 50px;
+}
+img {
+  margin: 20px;
+}
+
+
+
