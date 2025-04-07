@@ -1,0 +1,19 @@
+**Hosting a static website using an S3 bucket on AWS**
+
+1. Create S3 
+2. Upload files
+3. Enable Static Website Hosting
+4. Make Files Public
+   Add policy on bucket policy
+  {
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AllowPublicReadAccess",
+      "Effect": "Allow",
+      "Principal": "*",
+      "Action": "s3:GetObject",
+      "Resource": "arn:aws:s3:::bagaji/*"
+    }
+  ]
+}
