@@ -1,0 +1,76 @@
+1. AWS IAM + S3 CLI Access Control Project
+
+2. Project Overview
+
+This project demonstrates how to use AWS IAM to create a **CLI-only IAM user** (`s3-user`) with restricted **read-only access to Amazon S3**.  
+It follows the **Principle of Least Privilege**, ensuring that the user can access only what is necessary — and nothing more.
+
+---
+
+##  Learning Objectives
+
+- Understand IAM user, group, and policy structure
+- Configure programmatic-only access via access keys
+- Practice permission-based resource access control
+- Use the AWS CLI to validate access to S3 only
+
+---
+
+##  Project Setup
+
+| Component        | Value                      |
+|------------------|----------------------------|
+| IAM User         | `s3-user`                  |
+| Access Type      | Programmatic only (CLI)    |
+| Policy Attached  | `AmazonS3ReadOnlyAccess`   |
+| CLI Profile Name | `s3user`                   |
+| AWS Region       | `us-east-2` (Ohio)         |
+
+---
+
+## 🛠 Step-by-Step Procedure
+
+### 1. Create IAM User (Programmatic Access Only)
+
+- Go to IAM → Add User
+- Select **"I want to create an IAM user"**
+- **Do NOT enable console access**
+- Proceed with user creation
+- After creation, go to the **Security credentials** tab
+- Create an **access key** (for CLI use)
+
+### 2. Attach IAM Policy
+
+- Navigate to the `s3-user` user → Permissions tab
+- Attach the managed policy: `AmazonS3ReadOnlyAccess`
+
+### 3. Configure AWS CLI
+
+Run the following in terminal or PowerShell:
+
+```bash
+aws configure --profile s3user
+
+
+Then enter:
+-Access Key ID: (from IAM user)
+-Secret Access Key: (from IAM user)
+-Region: us-east-2
+-Output format: json
+
+
+
+Test Access via CLI
+-List all S3 buckets:
+aws s3 ls --profile s3user
+
+-List contents of a specific bucket:
+aws s3 ls s3://your-bucket-name --profile s3user
+
+-Try accessing EC2 (should be denied):
+aws ec2 describe-instances --profile s3user
+
+-Expected output:
+An error occurred (UnauthorizedOperation): You are not authorized to perform this operation
+
+
