@@ -1,0 +1,23 @@
+Goal:
+Create a custom network environment in AWS with:
+-Custom VPC
+- 2 subnets (public + private)
+- Internet Gateway + NAT Gateway
+- EC2 in the public subnet
+- Private subnet ready for DB (e.g., RDS) later
+- Fully automated with Terraform
+
+Project Overview
+-VPC:	Custom VPC (e.g., 10.0.0.0/16)
+-Subnets:	1 public (e.g., 10.0.1.0/24), 1 private (e.g., 10.0.2.0/24)
+-Internet Gateway:	For public subnet internet access
+-NAT Gateway:	So private subnet instances can reach internet
+-Route Tables:	Separate for public and private routes
+-EC2 Instance:	Launch in public subnet (e.g., Nginx installed)
+
+Practicing
+-VPC structure + subnetting
+-Terraform modules, variables, outputs
+-Routing concepts (IGW, NAT, route tables)
+-Infrastructure automation from zero
+-(Bonus) Security groups, EC2 key pair handling
