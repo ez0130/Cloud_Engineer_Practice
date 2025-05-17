@@ -1,5 +1,6 @@
-🌩️ Terraform AWS EC2 Web Server Auto Deployment Project
-📌 Project Overview
+* 🌩️ Terraform AWS EC2 Web Server Auto Deployment Project *
+  
+** 📌 Project Overview **
 This project utilizes Terraform to define and manage AWS infrastructure as code. It provisions core networking components (VPC, Subnet, Internet Gateway, Route Table, Security Group) and deploys an EC2 instance in a public subnet that automatically installs and runs an Nginx web server via user_data.
 
 ✅ Technologies & Tools Used
