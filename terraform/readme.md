@@ -14,7 +14,7 @@ Environment: WSL2 (Ubuntu on Windows)
 
 Utilities: AWS CLI, SSH
 
-##🏗️ Infrastructure Diagram (Simplified)
+## 🏗️ Infrastructure Diagram (Simplified)
 scss
 Copy
 Edit
@@ -23,7 +23,7 @@ AWS Cloud
     └── Public Subnet (10.0.1.0/24)
         └── EC2 Instance (Ubuntu)
             └── Nginx Web Server
-##⚙️ Key Terraform Resources
+## ⚙️ Key Terraform Resources
 aws_vpc: Creates a VPC with CIDR 10.0.0.0/16
 
 aws_subnet: Creates two public subnets
@@ -36,7 +36,7 @@ aws_security_group: Allows inbound SSH (port 22) and HTTP (port 80)
 
 aws_instance: Launches EC2 instance with Nginx auto-installed via user_data
 
-##🔧 user_data Script (Executed on EC2 Boot)
+## 🔧 user_data Script (Executed on EC2 Boot)
 bash
 Copy
 Edit
@@ -47,7 +47,7 @@ echo "<h1>Hello from Terraform EC2 with user_data!</h1>" > /var/www/html/index.h
 systemctl enable nginx
 systemctl start nginx
 
-##🧪 Testing & Results
+## 🧪 Testing & Results
 Successfully executed terraform apply to provision infrastructure
 
 Nginx web server was automatically installed and started
