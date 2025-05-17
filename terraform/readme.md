@@ -1,41 +1,44 @@
-Terraform AWS EC2 웹서버 자동 배포 프로젝트
+🌩️ Terraform AWS EC2 Web Server Auto Deployment Project
+📌 Project Overview
+This project utilizes Terraform to define and manage AWS infrastructure as code. It provisions core networking components (VPC, Subnet, Internet Gateway, Route Table, Security Group) and deploys an EC2 instance in a public subnet that automatically installs and runs an Nginx web server via user_data.
 
-** 프로젝트 개요
-
-   -Terraform을 사용해 AWS 상에 기본적인 네트워크 인프라(VPC, Subnet, IGW, Route Table, Security Group)를 구성하고, 퍼블릭 서브넷 내에 EC2 인스턴스를 자동으로 생성하여 Nginx 웹서버를 설치하고 구동하는 인프라를 코드로 관리한 프로젝트입니다.
-
-** 사용 기술 및 도구
-
+✅ Technologies & Tools Used
 Infrastructure as Code (IaC): Terraform
 
-클라우드 플랫폼: AWS (us-east-2 리전)
+Cloud Platform: AWS (Region: us-east-2)
 
-OS: Ubuntu 20.04 (EC2 AMI)
+Operating System: Ubuntu 20.04 (EC2 AMI)
 
-WSL2 (Ubuntu) 환경에서 실행
+Environment: WSL2 (Ubuntu on Windows)
 
-AWS CLI, SSH 등 활용
+Utilities: AWS CLI, SSH
 
-***Terraform infra diagram 구축 인프라 구성도***
+🏗️ Infrastructure Diagram (Simplified)
+scss
+Copy
+Edit
+AWS Cloud
+└── VPC (10.0.0.0/16)
+    └── Public Subnet (10.0.1.0/24)
+        └── EC2 Instance (Ubuntu)
+            └── Nginx Web Server
+⚙️ Key Terraform Resources
+aws_vpc: Creates a VPC with CIDR 10.0.0.0/16
 
-AWS Cloud |  VPC 10.0.0.0/16    |   Subnet- public CIDR: 10.0.1.0/24    |   EC2 Instance , Ubuntu , Nginx    
+aws_subnet: Creates two public subnets
 
-*** 주요 Terraform 리소스
+aws_internet_gateway: Attaches IGW to the VPC for internet access
 
-aws_vpc: CIDR 10.0.0.0/16으로 VPC 생성
+aws_route_table + aws_route_table_association: Configures internet route (0.0.0.0/0 → IGW)
 
-aws_subnet: 퍼블릭 서브넷 2개 생성
+aws_security_group: Allows inbound SSH (port 22) and HTTP (port 80)
 
-aws_internet_gateway: 인터넷 연결용 IGW 생성 및 VPC 연결
+aws_instance: Launches EC2 instance with Nginx auto-installed via user_data
 
-aws_route_table + aws_route_table_association: IGW를 통해 인터넷으로 라우팅 설정
-
-aws_security_group: 22(SSH), 80(HTTP) 포트 허용
-
-aws_instance: Ubuntu EC2 생성 + Nginx 자동 설치 (user_data)
-
-*** user_data (EC2 부팅 시 자동 실행 스크립트)
-
+🔧 user_data Script (Executed on EC2 Boot)
+bash
+Copy
+Edit
 #!/bin/bash
 apt update -y
 apt install -y nginx
@@ -43,15 +46,15 @@ echo "<h1>Hello from Terraform EC2 with user_data!</h1>" > /var/www/html/index.h
 systemctl enable nginx
 systemctl start nginx
 
-*** 테스트 및 결과 ***
+🧪 Testing & Results
+Successfully executed terraform apply to provision infrastructure
 
-terraform apply 실행 시 EC2 자동 생성 + Nginx 설치 완료
+Nginx web server was automatically installed and started
 
-웹브라우저에서 EC2의 퍼블릭 IP로 접속 시 웹페이지 정상 노출
+Web page was accessible via EC2's public IP in a browser
 
-SSH 접속 통해 내부에서도 curl localhost 확인 완료
+Verified Nginx response internally with curl localhost over SSH
 
-*** 작성자 ***
-
-Jiyoung Lee
-GitHub: https://github.com/ez0130
+👤 Author
+Name: Ji Lee
+GitHub: https://github.com/your-username
