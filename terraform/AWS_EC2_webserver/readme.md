@@ -1,3 +1,127 @@
+##Terraform AWS EC2 Web Server Auto Deployment Project
+
+### Project Overview
+
+This project uses Terraform to provision core network infrastructure on AWS (VPC, Subnet, Internet Gateway, Route Table, Security Group), and automatically launches an EC2 instance within a public subnet that installs and runs an Nginx web server using user_data. The project is structured with reusable Terraform modules for improved maintainability.
+
+### Technologies & Tools
+
+Infrastructure as Code (IaC): Terraform
+
+Cloud Platform: AWS (Region: us-east-2)
+
+Operating System: Ubuntu 20.04 (EC2 AMI)
+
+Development Environment: WSL2 (Ubuntu on Windows)
+
+Other Tools: AWS CLI, SSH
+
+### Infrastructure Diagram
+``` text
++-----------------------------+
+|         AWS Cloud          |
+|                             |
+|  +-----------------------+  |
+|  |        VPC (10.0.0.0/16) |  |
+|  |                         |  |
+|  |  +-------------------+  |  |
+|  |  | Subnet (Public)   |  |  |
+|  |  | CIDR: 10.0.1.0/24 |  |  |
+|  |  |                   |  |  |
+|  |  | +---------------+ |  |  |
+|  |  | |  EC2 Instance | |  |  |
+|  |  | |  Ubuntu +     | |  |  |
+|  |  | |  Nginx        | |  |  |
+|  |  | +---------------+ |  |  |
+|  |  +-------------------+  |  |
+|  |                         |  |
+|  +-------------------------+  |
+|                             |
++-----------------------------+
+```
+### Key Terraform Resources (with Module Structure)
+
+Root Module
+
+main.tf: Entry point that calls VPC, EC2, and security group modules
+
+variables.tf, outputs.tf, terraform.tfvars
+
+Module Structure
+``` text
+modules/
+├── vpc/
+│   ├── main.tf
+│   ├── variables.tf
+│   └── outputs.tf
+├── ec2/
+│   ├── main.tf
+│   ├── variables.tf
+│   └── outputs.tf
+└── security_group/
+    ├── main.tf
+    ├── variables.tf
+    └── outputs.tf
+```
+Each module includes the following resources:
+
+vpc: VPC, Subnet, Internet Gateway, Route Table
+
+security_group: Inbound rules for SSH and HTTP
+
+ec2: EC2 instance setup with Nginx via user_data
+
+### user_data (Executed on EC2 Boot)
+
+#!/bin/bash
+apt update -y
+apt install -y nginx
+echo "<h1>Hello from Terraform EC2 with user_data!</h1>" > /var/www/html/index.html
+systemctl enable nginx
+systemctl start nginx
+
+### Testing & Results
+
+Running terraform apply provisions infrastructure through reusable modules
+
+EC2 instance is launched and Nginx is installed automatically
+
+Web page is successfully displayed via public IP
+
+### Key Learning Points
+
+Organizing Terraform infrastructure code with modules
+
+Fundamentals of AWS networking (VPC, Subnet, IGW, Route Table)
+
+Terraform state management and reusability
+
+Automating server setup using user_data
+
+### Cost & Cleanup
+
+Run terraform destroy after testing to avoid unexpected AWS charges
+
+EC2 t3.micro is covered under the AWS Free Tier (up to 750 hours/month)
+
+### Future Expansion
+
+S3 + CloudFront static website hosting automation
+
+Building a 3-tier architecture with EC2 + RDS
+
+AWS budget alerts and notifications (Budget + SNS)
+
+### Author
+
+Name: Jiyoung Lee
+
+GitHub: https://github.com/ez0130
+
+
+
+
+
 ## Terraform AWS EC2 웹서버 자동 배포 프로젝트
 
 ### 프로젝트 개요
