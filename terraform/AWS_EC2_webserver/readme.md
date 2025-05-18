@@ -36,7 +36,7 @@ main.tf: VPC, EC2, SG 모듈을 호출하는 진입점
 variables.tf, outputs.tf, terraform.tfvars
 
 ### 모듈 구조
-
+```text
 modules/
 ├── vpc/
 │   ├── main.tf
