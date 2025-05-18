@@ -50,6 +50,7 @@ modules/
     ├── main.tf
     ├── variables.tf
     └── outputs.tf
+```
 
 각 모듈의 리소스:
 
