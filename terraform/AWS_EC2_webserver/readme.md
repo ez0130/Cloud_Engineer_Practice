@@ -1,4 +1,4 @@
-##Terraform AWS EC2 웹서버 자동 배포 프로젝트
+## Terraform AWS EC2 웹서버 자동 배포 프로젝트
 
 ### 프로젝트 개요
 
